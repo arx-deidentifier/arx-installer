@@ -1,0 +1,8 @@
+#!/bin/bash
+if [[ $* == /* ]] || [[ $* == ~* ]];
+then
+    (exec "@@INSTALLDIR@@/arx-launcher.run" $*) > /dev/null 2>&1
+else
+    (exec "@@INSTALLDIR@@/arx-launcher.run" $(pwd)/$*) > /dev/null 2>&1
+fi
+exit 0 
