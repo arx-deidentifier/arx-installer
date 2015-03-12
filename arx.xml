@@ -1,7 +1,7 @@
 <project>
     <shortName>arx</shortName>
     <fullName>ARX</fullName>
-    <version>2.3.2</version>
+    <version>3.0.0</version>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
@@ -120,7 +120,7 @@
             </startMenuShortcutList>
         </component>
         <include>
-            <file>F:/arx-installer/jre1.7.0_72/java.xml</file>
+            <file>F:/arx-installer/jre1.7.0_76/java.xml</file>
         </include>
     </componentList>
     <initializationActionList>
