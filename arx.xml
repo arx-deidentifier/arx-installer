@@ -120,7 +120,7 @@
             </startMenuShortcutList>
         </component>
         <include>
-            <file>F:/arx-installer/jre1.7.0_76/java.xml</file>
+            <file>F:/arx-installer/jre1.8.0_51/java.xml</file>
         </include>
     </componentList>
     <initializationActionList>
