@@ -5,6 +5,7 @@
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
+	<windows64bitMode>1</windows64bitMode>
     <componentList>
         <component>
             <name>default</name>
@@ -72,6 +73,9 @@
                         <distributionFile>
                             <origin>${build_project_directory}/arx-${project.version}-win.jar</origin>
                         </distributionFile>
+                        <distributionFile>
+                            <origin>${build_project_directory}/arx-${project.version}-win-64.jar</origin>
+                        </distributionFile>
                     </distributionFileList>
                 </folder>
                 <folder>
@@ -130,6 +134,15 @@
             <ruleList>
                 <platformTest>
                     <type>windows</type>
+                </platformTest>
+            </ruleList>
+        </setInstallerVariable>
+		  <setInstallerVariable>
+            <name>java_launcher_jar</name>
+            <value>arx-${project.version}-win-64.jar</value>
+            <ruleList>
+                <platformTest>
+                    <type>windows-x64</type>
                 </platformTest>
             </ruleList>
         </setInstallerVariable>

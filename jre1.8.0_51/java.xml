@@ -25,8 +25,8 @@
         <folder>
             <description>Java binaries - Microsoft Windows-x64</description>
             <destination>${installdir}/java</destination>
-            <name>java_windows</name>
-            <platforms>windows-x64</platforms>
+            <name>java_windows_x64</name>
+            <platforms>windows</platforms>
             <distributionFileList>
                 <distributionFile>
                     <allowWildcards>1</allowWildcards>
@@ -34,6 +34,7 @@
                 </distributionFile>
             </distributionFileList>
 	    <ruleList>
+		<platformTest type="windows-x64"/>
 		<isTrue value="${java_install_jre}" />
 	    </ruleList>
         </folder>
