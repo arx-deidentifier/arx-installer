@@ -1,11 +1,10 @@
 <project>
     <shortName>arx</shortName>
     <fullName>ARX</fullName>
-    <version>3.1.0</version>
+    <version>3.2.0</version>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
-	<windows64bitMode>1</windows64bitMode>
     <componentList>
         <component>
             <name>default</name>
@@ -73,10 +72,28 @@
                         <distributionFile>
                             <origin>${build_project_directory}/arx-${project.version}-win.jar</origin>
                         </distributionFile>
+                    </distributionFileList>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows</type>
+                        </platformTest>
+                    </ruleList>
+                </folder>
+                <folder>
+                    <description>Program Files</description>
+                    <destination>${installdir}</destination>
+                    <name>programfileswindows64</name>
+                    <platforms>windows</platforms>
+                    <distributionFileList>
                         <distributionFile>
                             <origin>${build_project_directory}/arx-${project.version}-win-64.jar</origin>
                         </distributionFile>
                     </distributionFileList>
+                    <ruleList>
+                        <platformTest>
+                            <type>windows-x64</type>
+                        </platformTest>
+                    </ruleList>
                 </folder>
                 <folder>
                     <description>Program Files</description>
@@ -137,7 +154,7 @@
                 </platformTest>
             </ruleList>
         </setInstallerVariable>
-		  <setInstallerVariable>
+        <setInstallerVariable>
             <name>java_launcher_jar</name>
             <value>arx-${project.version}-win-64.jar</value>
             <ruleList>
@@ -421,6 +438,7 @@ block of XML characters -->
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <vendor>ARX</vendor>
+    <windows64bitMode>1</windows64bitMode>
     <parameterList>
         <directoryParameter>
             <name>installdir</name>
