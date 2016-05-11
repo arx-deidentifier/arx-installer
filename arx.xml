@@ -1,7 +1,7 @@
 <project>
     <shortName>arx</shortName>
     <fullName>ARX</fullName>
-    <version>3.3.1</version>
+    <version>3.4.0</version>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
