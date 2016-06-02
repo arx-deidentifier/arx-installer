@@ -257,7 +257,7 @@ block of XML characters -->
                     <text>[Desktop Entry]
 Version=${project.version}
 Encoding=UTF-8
-Name=ARX
+Name=ARX-${project.version}
 Comment=ARX Anonymization Tool
 Exec=${installdir}/${project.shortName}-${project.version}-launcher.run
 Icon=${installdir}/logo_256.png
