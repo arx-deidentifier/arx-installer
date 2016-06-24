@@ -220,7 +220,7 @@
             <commandList>
                 <command>
                     <makeDefault>1</makeDefault>
-                    <runProgram>${installdir}\${project.shortName}-${project.version}-launcher.${platform_exec_suffix}</runProgram>
+                    <runProgram>${installdir}\${project.shortName}-launcher.${platform_exec_suffix}</runProgram>
                     <runProgramArguments>"%L"</runProgramArguments>
                     <verb>Open</verb>
                 </command>
@@ -259,7 +259,7 @@ Version=${project.version}
 Encoding=UTF-8
 Name=ARX-${project.version}
 Comment=ARX Anonymization Tool
-Exec=${installdir}/${project.shortName}-${project.version}-launcher.run
+Exec=${installdir}/${project.shortName}-launcher.run
 Icon=${installdir}/logo_256.png
 Terminal=false
 Type=Application
@@ -385,7 +385,7 @@ block of XML characters -->
             </ruleList>
             <substitutionList>
                 <substitution>
-                    <pattern>exec "${installdir}/${project.shortName}-${project.version}-launcher.run"</pattern>
+                    <pattern>exec "${installdir}/${project.shortName}-launcher.run"</pattern>
                     <value>open "${installdir}/.."</value>
                 </substitution>
             </substitutionList>
@@ -434,7 +434,6 @@ block of XML characters -->
             <path>${installdir}/bin</path>
         </removeDirectoryFromPath>
     </preUninstallationActionList>
-    <compressionAlgorithm>lzma-ultra</compressionAlgorithm>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <vendor>ARX</vendor>

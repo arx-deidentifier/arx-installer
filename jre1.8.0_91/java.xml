@@ -124,7 +124,7 @@
             <allowEmptyValue>1</allowEmptyValue>
             <width>40</width>
         </stringParameter>
-        <stringParameter name="java_launcher_binary_name" value="${project.shortName}-${project.version}-launcher.${platform_exec_suffix}" ask="0">
+        <stringParameter name="java_launcher_binary_name" value="${project.shortName}-launcher.${platform_exec_suffix}" ask="0">
             <description></description>
             <explanation></explanation>
             <default></default>
