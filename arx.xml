@@ -1,7 +1,7 @@
 <project>
     <shortName>arx</shortName>
     <fullName>ARX</fullName>
-    <version>3.4.1</version>
+    <version>3.4.2</version>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
@@ -234,7 +234,7 @@
         <actionGroup>
             <actionList>
                 <writeFile>
-                    <path>${installdir}/${project.vendor}-x-arx.xml</path>
+                    <path>${installdir}/${project.vendor}-${project.version}-x-arx.xml</path>
 
                     <!-- The CDATA notation allow escaping a
 block of XML characters -->
@@ -249,11 +249,11 @@ block of XML characters -->
                 </writeFile>
                 <runProgram>
                     <program>xdg-mime</program>
-                    <programArguments>install ${installdir}/${project.vendor}-x-arx.xml</programArguments>
+                    <programArguments>install ${installdir}/${project.vendor}-${project.version}-x-arx.xml</programArguments>
                 </runProgram>
                 <writeFile>
                     <encoding>utf-8</encoding>
-                    <path>~/.local/share/applications/arx.desktop</path>
+                    <path>~/.local/share/applications/arx-${project.version}.desktop</path>
                     <text>[Desktop Entry]
 Version=${project.version}
 Encoding=UTF-8
@@ -268,12 +268,12 @@ MimeType=application/x-arx
 </text>
                 </writeFile>
                 <changePermissions>
-                    <files>~/.local/share/applications/arx.desktop</files>
+                    <files>~/.local/share/applications/arx-${project.version}.desktop</files>
                     <permissions>764</permissions>
                 </changePermissions>
                 <runProgram>
                     <program>xdg-mime</program>
-                    <programArguments>default arx.desktop application/x-arx</programArguments>
+                    <programArguments>default arx-${project.version}.desktop application/x-arx</programArguments>
                 </runProgram>
                 <runProgram>
                     <program>update-desktop-database</program>
@@ -325,7 +325,7 @@ block of XML characters -->
             </ruleList>
         </actionGroup>
         <addDirectoryToPath>
-            <insertAt>end</insertAt>
+            <insertAt>beginning</insertAt>
             <path>${installdir}/bin</path>
         </addDirectoryToPath>
         <substitute>
@@ -416,11 +416,13 @@ block of XML characters -->
             <actionList>
                 <runProgram>
                     <program>xdg-mime</program>
-                    <programArguments>uninstall ${installdir}/${project.vendor}-x-arx.xml</programArguments>
+                    <programArguments>uninstall ${installdir}/${project.vendor}-${product_version}-x-arx.xml</programArguments>
                 </runProgram>
-                <deleteFile path="~/.local/share/applications/arx.desktop"/>
                 <deleteFile>
-                    <path>${installdir}/${project.vendor}-x-arx.xml</path>
+                    <path>~/.local/share/applications/arx-${product_version}.desktop</path>
+                </deleteFile>
+                <deleteFile>
+                    <path>${installdir}/${project.vendor}-${product_version}-x-arx.xml</path>
                 </deleteFile>
             </actionList>
             <ruleList>
@@ -429,11 +431,12 @@ block of XML characters -->
                 </platformTest>
             </ruleList>
         </actionGroup>
-        <deleteFile path="${installdir}/${project.shortName}-${project.version}-launcher.app"/>
+        <deleteFile path="${installdir}/${project.shortName}-launcher.app"/>
         <removeDirectoryFromPath>
             <path>${installdir}/bin</path>
         </removeDirectoryFromPath>
     </preUninstallationActionList>
+    <compressionAlgorithm>lzma-ultra</compressionAlgorithm>
     <enableRollback>1</enableRollback>
     <enableTimestamp>1</enableTimestamp>
     <vendor>ARX</vendor>
