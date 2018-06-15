@@ -3,7 +3,11 @@
 <plist version="1.0">
 	<dict>
 		<key>CFBundleDevelopmentRegion</key>
-		<string>English</string>
+		<string>en</string>
+		<key>CFBundleLocalizations</key>
+		<array>
+			<string>en</string>
+		</array>
 		<key>CFBundleExecutable</key>
 		<string>arx-launcher.app/Contents/MacOS/installbuilder.sh</string>
 		<key>CFBundleIconFile</key>

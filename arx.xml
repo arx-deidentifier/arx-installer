@@ -1,7 +1,9 @@
 <project>
-    <shortName>arx</shortName>
+    <shortName>ARX</shortName>
     <fullName>ARX</fullName>
-    <version>3.6.0</version>
+    <version>3.7.0</version>
+    <createOsxBundleZip>1</createOsxBundleZip>
+    <licenseFile>E:\arx-license.txt</licenseFile>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
@@ -141,7 +143,7 @@
             </startMenuShortcutList>
         </component>
         <include>
-            <file>F:/arx-installer/jre1.8.0_91/java.xml</file>
+            <file>E:\jre1.8.0_91\java.xml</file>
         </include>
     </componentList>
     <initializationActionList>
@@ -241,7 +243,7 @@ block of XML characters -->
                     <text>&lt;?xml version="1.0"?&gt;
 &lt;mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info"&gt;
 &lt;mime-type type="application/x-arx"&gt;
-&lt;comment&gt;Arx Project File&lt;/comment&gt;
+&lt;comment&gt;ARX Project File&lt;/comment&gt;
 &lt;glob pattern="*.deid"/&gt;
 &lt;/mime-type&gt;
 &lt;/mime-info&gt;
