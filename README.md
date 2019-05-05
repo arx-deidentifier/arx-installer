@@ -10,6 +10,6 @@ Hashes are created with HashMyFiles.
 
 Hashes are signed with Gpg4win.
 
-More details BitRock InstallBuilder can be found at: http://installbuilder.bitrock.com/   
+More details about BitRock InstallBuilder can be found at: http://installbuilder.bitrock.com/   
 
 More details about ARX can be found at: http://arx.deidentifier.org/   
