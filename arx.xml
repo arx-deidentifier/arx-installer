@@ -1,7 +1,7 @@
 <project>
     <shortName>ARX</shortName>
     <fullName>ARX</fullName>
-    <version>3.7.1</version>
+    <version>3.8.0</version>
     <createOsxBundleZip>1</createOsxBundleZip>
     <licenseFile>E:\arx-license.txt</licenseFile>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
