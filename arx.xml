@@ -1,7 +1,7 @@
 <project>
     <shortName>ARX</shortName>
     <fullName>ARX</fullName>
-    <version>3.8.0</version>
+    <version>3.9.0</version>
     <createOsxBundleZip>1</createOsxBundleZip>
     <licenseFile>E:\arx-license.txt</licenseFile>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
@@ -143,7 +143,7 @@
             </startMenuShortcutList>
         </component>
         <include>
-            <file>E:\jre1.8.0_91\java.xml</file>
+            <file>E:\jdk14.0.1\java.xml</file>
         </include>
     </componentList>
     <initializationActionList>
