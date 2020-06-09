@@ -3,7 +3,8 @@
     <fullName>ARX</fullName>
     <version>3.9.0</version>
     <createOsxBundleZip>1</createOsxBundleZip>
-    <licenseFile>E:\arx-license.txt</licenseFile>
+    <outputDirectory>${build_project_directory}/installers/</outputDirectory>
+    <licenseFile>${build_project_directory}/arx-license.txt</licenseFile>
     <leftImage>${build_project_directory}/icons/logo_64.png</leftImage>
     <logoImage>${build_project_directory}/icons/logo_48.png</logoImage>
     <splashImage>${build_project_directory}/icons/splash.png</splashImage>
@@ -116,7 +117,7 @@
             </startMenuShortcutList>
         </component>
         <include>
-            <file>E:\jdk14.0.1\java.xml</file>
+            <file>java.xml</file>
         </include>
     </componentList>
     <initializationActionList>
