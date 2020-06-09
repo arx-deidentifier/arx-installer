@@ -57,35 +57,8 @@
                 <folder>
                     <description>Program Files</description>
                     <destination>${installdir}</destination>
-                    <name>programfileslinux</name>
-                    <platforms>linux</platforms>
-                    <distributionFileList>
-                        <distributionFile>
-                            <origin>${build_project_directory}/arx-${project.version}-gtk.jar</origin>
-                        </distributionFile>
-                    </distributionFileList>
-                </folder>
-                <folder>
-                    <description>Program Files</description>
-                    <destination>${installdir}</destination>
-                    <name>programfileswindows</name>
-                    <platforms>windows</platforms>
-                    <distributionFileList>
-                        <distributionFile>
-                            <origin>${build_project_directory}/arx-${project.version}-win.jar</origin>
-                        </distributionFile>
-                    </distributionFileList>
-                    <ruleList>
-                        <platformTest>
-                            <type>windows</type>
-                        </platformTest>
-                    </ruleList>
-                </folder>
-                <folder>
-                    <description>Program Files</description>
-                    <destination>${installdir}</destination>
                     <name>programfileswindows64</name>
-                    <platforms>windows</platforms>
+                    <platforms>windows-x64</platforms>
                     <distributionFileList>
                         <distributionFile>
                             <origin>${build_project_directory}/arx-${project.version}-win-64.jar</origin>
@@ -149,28 +122,10 @@
     <initializationActionList>
         <setInstallerVariable>
             <name>java_launcher_jar</name>
-            <value>arx-${project.version}-win.jar</value>
-            <ruleList>
-                <platformTest>
-                    <type>windows</type>
-                </platformTest>
-            </ruleList>
-        </setInstallerVariable>
-        <setInstallerVariable>
-            <name>java_launcher_jar</name>
             <value>arx-${project.version}-win-64.jar</value>
             <ruleList>
                 <platformTest>
                     <type>windows-x64</type>
-                </platformTest>
-            </ruleList>
-        </setInstallerVariable>
-        <setInstallerVariable>
-            <name>java_launcher_jar</name>
-            <value>arx-${project.version}-gtk.jar</value>
-            <ruleList>
-                <platformTest>
-                    <type>linux</type>
                 </platformTest>
             </ruleList>
         </setInstallerVariable>
@@ -229,7 +184,7 @@
             </commandList>
             <ruleList>
                 <platformTest>
-                    <type>windows</type>
+                    <type>windows-x64</type>
                 </platformTest>
             </ruleList>
         </associateWindowsFileExtension>
@@ -335,7 +290,7 @@ block of XML characters -->
             <type>exact</type>
             <ruleList>
                 <platformTest>
-                    <type>windows</type>
+                    <type>windows-x64</type>
                 </platformTest>
             </ruleList>
             <substitutionList>
@@ -359,7 +314,7 @@ block of XML characters -->
             <ruleList>
                 <platformTest>
                     <negate>1</negate>
-                    <type>windows</type>
+                    <type>windows-x64</type>
                 </platformTest>
             </ruleList>
             <substitutionList>
@@ -398,7 +353,7 @@ block of XML characters -->
             <ruleList>
                 <platformTest>
                     <negate>1</negate>
-                    <type>windows</type>
+                    <type>windows-x64</type>
                 </platformTest>
             </ruleList>
         </changePermissions>
@@ -410,7 +365,7 @@ block of XML characters -->
             <progID>arx.project.2</progID>
             <ruleList>
                 <platformTest>
-                    <type>windows</type>
+                    <type>windows-x64</type>
                 </platformTest>
             </ruleList>
         </removeWindowsFileAssociation>
