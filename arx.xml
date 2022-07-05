@@ -1,7 +1,7 @@
 <project>
     <shortName>ARX</shortName>
     <fullName>ARX</fullName>
-    <version>3.9.0</version>
+    <version>3.9.1</version>
     <createOsxBundleZip>1</createOsxBundleZip>
     <outputDirectory>${build_project_directory}/installers/</outputDirectory>
     <licenseFile>${build_project_directory}/arx-license.txt</licenseFile>
@@ -59,7 +59,7 @@
                     <description>Program Files</description>
                     <destination>${installdir}</destination>
                     <name>programfileswindows64</name>
-                    <platforms>windows-x64</platforms>
+                    <platforms>windows</platforms>
                     <distributionFileList>
                         <distributionFile>
                             <origin>${build_project_directory}/arx-${project.version}-win-64.jar</origin>
@@ -67,7 +67,7 @@
                     </distributionFileList>
                     <ruleList>
                         <platformTest>
-                            <type>windows-x64</type>
+                            <type>windows</type>
                         </platformTest>
                     </ruleList>
                 </folder>
@@ -126,7 +126,7 @@
             <value>arx-${project.version}-win-64.jar</value>
             <ruleList>
                 <platformTest>
-                    <type>windows-x64</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
         </setInstallerVariable>
@@ -185,7 +185,7 @@
             </commandList>
             <ruleList>
                 <platformTest>
-                    <type>windows-x64</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
         </associateWindowsFileExtension>
@@ -291,7 +291,7 @@ block of XML characters -->
             <type>exact</type>
             <ruleList>
                 <platformTest>
-                    <type>windows-x64</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
             <substitutionList>
@@ -315,7 +315,7 @@ block of XML characters -->
             <ruleList>
                 <platformTest>
                     <negate>1</negate>
-                    <type>windows-x64</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
             <substitutionList>
@@ -354,7 +354,7 @@ block of XML characters -->
             <ruleList>
                 <platformTest>
                     <negate>1</negate>
-                    <type>windows-x64</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
         </changePermissions>
@@ -366,7 +366,7 @@ block of XML characters -->
             <progID>arx.project.2</progID>
             <ruleList>
                 <platformTest>
-                    <type>windows-x64</type>
+                    <type>windows</type>
                 </platformTest>
             </ruleList>
         </removeWindowsFileAssociation>
