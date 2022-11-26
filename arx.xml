@@ -117,7 +117,7 @@
             </startMenuShortcutList>
         </component>
         <include>
-            <file>java.xml</file>
+            <file>E:\java\java.xml</file>
         </include>
     </componentList>
     <initializationActionList>
