@@ -1,8 +1,10 @@
-Installer for the ARX anonymization tool
+Installer for the ARX Data Anonymization Tool
 ====
 
-This project contains configuration files for building the ARX installer.
-The installer is created using BitRock InstallBuilder.
+This project contains configuration files for building the ARX installer. The installer is based on BitRock InstallBuilder.
+
+Instructions
+----
 
 Download JRE/JDKs from [here](https://installbuilder.com/java/) and place the folders java-[platform] in the java folder
 in the root of the repository (ignore the other files, i.e. java.xml). Current Java version: 17.0.3.
