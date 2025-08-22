@@ -1,863 +1,202 @@
 <component>
-    <name>java</name>
-    <description>Java Runtime Environment</description>
-    <canBeEdited>0</canBeEdited>
-    <selected>1</selected>
-    <show>0</show>
+  <name>java</name>
+  <description>Java Runtime Environment</description>
+  <canBeEdited>0</canBeEdited>
+  <selected>1</selected>
+  <show>0</show>
+  <!-- folders storing JRE -->
+  <folderList>
+    <folder>
+      <description>Java binaries - Microsoft Windows</description>
+      <destination>${installdir}/java</destination>
+      <name>java_windows</name>
+      <platforms>all</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-windows/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <!--
+          This allows supporting windows-x64 on latest InstallBuilder versions without
+          having to specify windows-x64 as the folder platform, which would not work
+          on older versions
+      -->
+      <shouldPackRuleList>
+        <compareText text="${platform_name}" logic="contains" value="windows"/>
+      </shouldPackRuleList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+      </ruleList>
+    </folder>
+    <folder>
+      <description>Java binaries - Linux</description>
+      <destination>${installdir}/java</destination>
+      <name>java_linux</name>
+      <platforms>linux</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-linux/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+      </ruleList>
+    </folder>
+    <folder>
+      <description>Java binaries - Linux-x64</description>
+      <destination>${installdir}/java</destination>
+      <name>java_linux_x64</name>
+      <platforms>linux-x64</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-linux-x64/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+      </ruleList>
+    </folder>
+    <folder>
+      <description>Java binaries - Solaris Sparc</description>
+      <destination>${installdir}/java</destination>
+      <name>java_solaris_sparc</name>
+      <platforms>solaris-sparc</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-solaris-sparc/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+      </ruleList>
+    </folder>
+    <folder>
+      <description>Java binaries - Solaris Intel</description>
+      <destination>${installdir}/java</destination>
+      <name>java_solaris_intel</name>
+      <platforms>solaris-intel</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-solaris-intel/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+      </ruleList>
+    </folder>
+    <folder>
+      <description>Java binaries - Mac OS X</description>
+      <destination>${installdir}/java</destination>
+      <name>java_osx</name>
+      <platforms>osx</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-osx/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+        <ruleGroup ruleEvaluationLogic="or">
+          <ruleList>
+            <isFalse value="${__java_component_has_java_osx_arm64}"/>
+            <platformTest type="osx-x86_64"/>
+          </ruleList>
+        </ruleGroup>
+      </ruleList>
+    </folder>
+    <folder>
+      <description>Java binaries - Mac OS X</description>
+      <destination>${installdir}/java</destination>
+      <name>java_osx_arm64</name>
+      <platforms>osx</platforms>
+      <distributionFileList>
+        <distributionFile>
+          <allowWildcards>1</allowWildcards>
+          <origin>${build_project_directory}/java/java-osx-arm64/*</origin>
+        </distributionFile>
+      </distributionFileList>
+      <ruleList>
+        <isTrue value="${java_install_jre}" />
+        <platformTest type="osx-arm64"/>
+      </ruleList>
+    </folder>
 
-    <!-- folders storing JRE -->
-    <folderList>
-        <folder>
-            <description>Java binaries - Microsoft Windows</description>
-            <destination>${installdir}/java</destination>
-            <name>java_windows</name>
-            <platforms>all</platforms>
-            <distributionFileList>
-                <distributionFile>
-                    <allowWildcards>1</allowWildcards>
-                    <origin>${build_project_directory}/java/java-windows/*</origin>
-                </distributionFile>
-            </distributionFileList>
-            <!--
-                This allows supporting windows-x64 on latest InstallBuilder versions without
-                having to specify windows-x64 as the folder platform, which would not work
-                on older versions
-            -->
-            <shouldPackRuleList>
-              <compareText text="${platform_name}" logic="contains" value="windows"/>
-            </shouldPackRuleList>
-	    <ruleList>
-		<isTrue value="${java_install_jre}" />
-	    </ruleList>
-        </folder>
-        <folder>
-            <description>Java binaries - Linux</description>
-            <destination>${installdir}/java</destination>
-            <name>java_linux</name>
-            <platforms>linux</platforms>
-            <distributionFileList>
-                <distributionFile>
-                    <allowWildcards>1</allowWildcards>
-                    <origin>${build_project_directory}/java/java-linux/*</origin>
-                </distributionFile>
-            </distributionFileList>
-	    <ruleList>
-		<isTrue value="${java_install_jre}" />
-	    </ruleList>
-        </folder>
-        <folder>
-            <description>Java binaries - Linux-x64</description>
-            <destination>${installdir}/java</destination>
-            <name>java_linux_x64</name>
-            <platforms>linux-x64</platforms>
-            <distributionFileList>
-                <distributionFile>
-                    <allowWildcards>1</allowWildcards>
-                    <origin>${build_project_directory}/java/java-linux-x64/*</origin>
-                </distributionFile>
-            </distributionFileList>
-	    <ruleList>
-		<isTrue value="${java_install_jre}" />
-	    </ruleList>
-        </folder>
-        <folder>
-            <description>Java binaries - Solaris Sparc</description>
-            <destination>${installdir}/java</destination>
-            <name>java_solaris_sparc</name>
-            <platforms>solaris-sparc</platforms>
-            <distributionFileList>
-                <distributionFile>
-                    <allowWildcards>1</allowWildcards>
-                    <origin>${build_project_directory}/java/java-solaris-sparc/*</origin>
-                </distributionFile>
-            </distributionFileList>
-	    <ruleList>
-		<isTrue value="${java_install_jre}" />
-	    </ruleList>
-        </folder>
-        <folder>
-            <description>Java binaries - Solaris Intel</description>
-            <destination>${installdir}/java</destination>
-            <name>java_solaris_intel</name>
-            <platforms>solaris-intel</platforms>
-            <distributionFileList>
-                <distributionFile>
-                    <allowWildcards>1</allowWildcards>
-                    <origin>${build_project_directory}/java/java-solaris-intel/*</origin>
-                </distributionFile>
-            </distributionFileList>
-	    <ruleList>
-		<isTrue value="${java_install_jre}" />
-	    </ruleList>
-        </folder>
-        <folder>
-            <description>Java binaries - Mac OS X</description>
-            <destination>${installdir}/java</destination>
-            <name>java_osx</name>
-            <platforms>osx</platforms>
-            <distributionFileList>
-                <distributionFile>
-                    <allowWildcards>1</allowWildcards>
-                    <origin>${build_project_directory}/java/java-osx/*</origin>
-                </distributionFile>
-            </distributionFileList>
-	    <ruleList>
-		<isTrue value="${java_install_jre}" />
-	    </ruleList>
-        </folder>
-    </folderList>
+  </folderList>
+  <preBuildActionList>
+    <setInstallerVariable name="__java_component_has_java_osx_arm64" value="1">
+      <ruleList>
+        <fileExists path="${build_project_directory}/java-osx-arm64/bin/java"/>
+      </ruleList>
+    </setInstallerVariable>
+  </preBuildActionList>
+  <!-- parameters for creating Java launchers -->
+  <parameterList>
+    <stringParameter name="__java_component_has_java_osx_arm64" value="0" ask="0" />
+    <stringParameter name="java_launcher_destination" value="${installdir}" ask="0" />
+    <stringParameter name="java_launcher_binary_name" value="${project.shortName}-launcher.${platform_exec_suffix}" ask="0" />
+    <stringParameter name="java_launcher_arguments" value="" ask="0" />
+    <stringParameter name="java_launcher_vm_parameters" value="" ask="0" />
+    <stringParameter name="java_launcher_jar" value="" ask="0" />
+    <stringParameter name="java_launcher_mainClass" value="" ask="0" />
+    <stringParameter name="java_launcher_classpath" value="" ask="0" />
+    <stringParameter name="java_launcher_startmenu_shortcut_name" value="Launch ${project.fullName}" ask="0" />
+    <booleanParameter name="java_launcher_add_to_win_startmenu" value="1" ask="0" />
+    <booleanParameter name="java_install_jre" value="1" ask="0" />
+    <booleanParameter name="java_create_launcher" value="1" ask="0" />
+  </parameterList>
 
-    <!-- parameters for creating Java launchers -->
-    <parameterList>
-	<stringParameter name="java_launcher_destination" value="${installdir}" ask="0" />
-	<stringParameter name="java_launcher_binary_name" value="${project.shortName}-launcher.${platform_exec_suffix}" ask="0" />
-	<stringParameter name="java_launcher_arguments" value="" ask="0" />
-	<stringParameter name="java_launcher_vm_parameters" value="" ask="0" />
-	<stringParameter name="java_launcher_jar" value="" ask="0" />
-	<stringParameter name="java_launcher_mainClass" value="" ask="0" />
-	<stringParameter name="java_launcher_classpath" value="" ask="0" />
-	<stringParameter name="java_launcher_startmenu_shortcut_name" value="Launch ${project.fullName}" ask="0" />
-	<booleanParameter name="java_launcher_add_to_win_startmenu" value="1" ask="0" />
-	<booleanParameter name="java_install_jre" value="1" ask="0" />
-	<booleanParameter name="java_create_launcher" value="1" ask="0" />
-    </parameterList>
+  <!-- set Java information -->
+  <readyToInstallActionList>
+    <if>
+      <actionList>
+        <setInstallerVariable name="java_version_major" value="21.0" />
+        <setInstallerVariable name="java_version" value="21.0.21.0.3" />
+        <setInstallerVariable name="java_version_full" value="21.0.3" />
+        <setInstallerVariable name="java_version_vendor" value="Sun" />
+        <setInstallerVariable name="java_bitness" value="64" />
+        <!-- determine Java binary name - javaw.exe on Windows, java otherwise -->
+        <setInstallerVariable>
+          <name>java_executable</name>
+          <value>${installdir}/java/bin/java</value>
+        </setInstallerVariable>
+        <setInstallerVariable>
+          <name>java_executable</name>
+          <value>${installdir}/java/bin/javaw.exe</value>
+          <ruleList>
+            <platformTest type="windows" />
+          </ruleList>
+        </setInstallerVariable>
+      </actionList>
+      <elseActionList>
+        <setInstallerVariable>
+          <name>java_executable</name>
+          <value></value>
+        </setInstallerVariable>
+      </elseActionList>
+      <conditionRuleList>
+        <isTrue value="${java_install_jre}" />
+      </conditionRuleList>
+    </if>
+  </readyToInstallActionList>
 
-    <!-- set Java information -->
-    <readyToInstallActionList>
-	<if>
-	    <actionList>
-		<setInstallerVariable name="java_version_major" value="17.0" />
-		<setInstallerVariable name="java_version" value="17.0.17.0.3" />
-		<setInstallerVariable name="java_version_full" value="17.0.3" />
-		<setInstallerVariable name="java_version_vendor" value="Sun" />
-		<setInstallerVariable name="java_bitness" value="64" />
-		<!-- determine Java binary name - javaw.exe on Windows, java otherwise -->
-		<setInstallerVariable>
-		    <name>java_executable</name>
-		    <value>${installdir}/java/bin/java</value>
-		</setInstallerVariable>
-		<setInstallerVariable>
-		    <name>java_executable</name>
-		    <value>${installdir}/java/bin/javaw.exe</value>
-		    <ruleList>
-			<platformTest type="windows" />
-		    </ruleList>
-		</setInstallerVariable>
-	    </actionList>
-	    <elseActionList>
-		<setInstallerVariable>
-		    <name>java_executable</name>
-		    <value></value>
-		</setInstallerVariable>
-	    </elseActionList>
-	    <conditionRuleList>
-		<isTrue value="${java_install_jre}" />
-	    </conditionRuleList>
-	</if>
-    </readyToInstallActionList>
-
-    <postInstallationActionList>
-        <!-- change permissions of all binaries -->
-        <changePermissions files="${installdir}/java/bin/*" permissions="0755" abortOnError="0" showMessageOnError="0">
-            <ruleList>
-                <fileExists path="${installdir}/java/bin" />
-                <platformTest negate="1" type="windows" />
-            </ruleList>
-        </changePermissions>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.net/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.net/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.net/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.vm.compiler/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.vm.compiler/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.vm.compiler/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.management.jfr/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.management.jfr/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.management.jfr/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.sql/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.sql/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.sql/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jdi/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jdi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jdi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.unsupported.desktop/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.unsupported.desktop/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.unsupported.desktop/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.naming.dns/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.naming.dns/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.naming.dns/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.xml.crypto/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.xml.crypto/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.xml.crypto/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.random/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.random/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.random/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jpackage/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jpackage/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jpackage/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.sctp/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.sctp/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.sctp/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.management.rmi/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.management.rmi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.management.rmi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.le/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.le/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.le/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.xml/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.xml/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.xml/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.accessibility/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.accessibility/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.accessibility/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.vm.ci/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.vm.ci/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.vm.ci/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.security.sasl/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.security.sasl/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.security.sasl/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.compiler/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.compiler/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.compiler/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.incubator.vector/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.incubator.vector/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.incubator.vector/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jconsole/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jconsole/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jconsole/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.sql.rowset/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.sql.rowset/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.sql.rowset/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.se/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.se/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.se/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.httpserver/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.httpserver/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.httpserver/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.instrument/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.instrument/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.instrument/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.security.jgss/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.security.jgss/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.security.jgss/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.xml.dom/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.xml.dom/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.xml.dom/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.scripting/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.scripting/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.scripting/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.zipfs/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.zipfs/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.zipfs/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jshell/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jshell/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jshell/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.crypto.ec/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.crypto.ec/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.crypto.ec/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jcmd/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jcmd/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jcmd/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.jvmstat/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.jvmstat/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.jvmstat/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.unsupported/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.unsupported/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.unsupported/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.prefs/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.prefs/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.prefs/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.management.agent/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.management.agent/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.management.agent/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.management/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.management/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.management/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.editpad/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.editpad/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.editpad/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.naming.rmi/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.naming.rmi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.naming.rmi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
+  <postInstallationActionList>
+    <!-- change permissions of all binaries -->
+    <changePermissions files="${installdir}/java/bin/*" permissions="0755" abortOnError="0" showMessageOnError="0">
+      <ruleList>
+        <fileExists path="${installdir}/java/bin" />
+        <platformTest negate="1" type="windows" />
+      </ruleList>
+    </changePermissions>
         <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.dynalink/LICENSE" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.dynalink/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
         <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.dynalink/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
@@ -866,298 +205,28 @@
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.transaction.xa/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.transaction.xa/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.dynalink/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.transaction.xa/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.net.http/LICENSE" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.scripting/LICENSE" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.net.http/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.net.http/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.scripting/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jlink/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jlink/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.scripting/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jlink/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.ed/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.ed/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.ed/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.compiler/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.compiler/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.compiler/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.smartcardio/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.smartcardio/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.smartcardio/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.incubator.foreign/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.incubator.foreign/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.incubator.foreign/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jdwp.agent/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jdwp.agent/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jdwp.agent/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.security.jgss/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.security.jgss/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.security.jgss/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.datatransfer/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.datatransfer/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.datatransfer/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.nio.mapmode/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.nio.mapmode/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.nio.mapmode/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.desktop/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.desktop/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.desktop/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.javadoc/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.javadoc/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.javadoc/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.logging/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.logging/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.logging/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.management/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.management/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.management/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/cldr.md" linkName="${installdir}/java/legal/jdk.localedata/cldr.md" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/cldr.md" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.localedata/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.localedata/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.localedata/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
         <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.security.auth/LICENSE" abortOnError="false" showMessageOnError="false">
@@ -1166,142 +235,70 @@
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.security.auth/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
         <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.security.auth/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.attach/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.attach/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.security.auth/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.attach/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.crypto.cryptoki/LICENSE" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.compiler/LICENSE" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.crypto.cryptoki/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.crypto.cryptoki/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.compiler/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jstatd/LICENSE" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.compiler/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.sctp/LICENSE" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jstatd/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jstatd/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.sctp/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.naming/LICENSE" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.sctp/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.le/LICENSE" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.naming/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.naming/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.le/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.hotspot.agent/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.hotspot.agent/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.le/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.hotspot.agent/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jdeps/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jdeps/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jdeps/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.vm.compiler.management/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.vm.compiler.management/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.vm.compiler.management/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
         <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jsobject/LICENSE" abortOnError="false" showMessageOnError="false">
@@ -1310,52 +307,706 @@
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jsobject/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
         <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jsobject/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.opt/LICENSE" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.opt/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jsobject/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.opt/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
-            </ruleList>
-        </createSymLink>
-        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jartool/LICENSE" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jdwp.agent/LICENSE" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jartool/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jdwp.agent/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jdwp.agent/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jartool/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.smartcardio/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.smartcardio/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.smartcardio/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jdeps/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jdeps/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jdeps/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.naming.rmi/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.naming.rmi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.naming.rmi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jstatd/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jstatd/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jstatd/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.se/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.se/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.se/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.unsupported.desktop/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.unsupported.desktop/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.unsupported.desktop/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jshell/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jshell/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jshell/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.management/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.management/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.management/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.management/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.management/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.management/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.management.jfr/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.management.jfr/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.management.jfr/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.nio.mapmode/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.nio.mapmode/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.nio.mapmode/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.hotspot.agent/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.hotspot.agent/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.hotspot.agent/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.ed/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.ed/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.ed/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.management.rmi/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.management.rmi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.management.rmi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.xml/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.xml/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.xml/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.security.sasl/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.security.sasl/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.security.sasl/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.zipfs/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.zipfs/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.zipfs/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.prefs/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.prefs/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.prefs/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jdi/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jdi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jdi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jpackage/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jpackage/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jpackage/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.compiler/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.compiler/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.compiler/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.vm.ci/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.vm.ci/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.vm.ci/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.xml.crypto/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.xml.crypto/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.xml.crypto/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.transaction.xa/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.transaction.xa/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.transaction.xa/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.localedata/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.localedata/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.localedata/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/cldr.md" linkName="${installdir}/java/legal/jdk.localedata/cldr.md" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/cldr.md" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.httpserver/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.httpserver/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.httpserver/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.unsupported/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.unsupported/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.unsupported/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.security.jgss/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.security.jgss/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.security.jgss/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.incubator.vector/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.incubator.vector/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.incubator.vector/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.editpad/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.editpad/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.editpad/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jlink/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jlink/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jlink/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.xml.dom/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.xml.dom/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.xml.dom/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.crypto.ec/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.crypto.ec/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.crypto.ec/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.attach/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.attach/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.attach/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.desktop/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.desktop/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.desktop/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.vm.compiler.management/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.vm.compiler.management/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.vm.compiler.management/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.datatransfer/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.datatransfer/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.datatransfer/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
         <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.rmi/LICENSE" abortOnError="false" showMessageOnError="false">
@@ -1364,16 +1015,34 @@
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.rmi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
         <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.rmi/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.rmi/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.naming.dns/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.naming.dns/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.naming.dns/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
         <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jfr/LICENSE" abortOnError="false" showMessageOnError="false">
@@ -1382,16 +1051,124 @@
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jfr/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
         <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jfr/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jfr/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.security.jgss/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.security.jgss/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.security.jgss/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.opt/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.opt/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.opt/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.net/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.net/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.net/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jcmd/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jcmd/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jcmd/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jartool/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jartool/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jartool/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.jvmstat/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.jvmstat/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.jvmstat/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
             </ruleList>
         </createSymLink>
         <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.charsets/LICENSE" abortOnError="false" showMessageOnError="false">
@@ -1400,89 +1177,322 @@
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
             </ruleList>
         </createSymLink>
-        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.charsets/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
-            <ruleList>
-                <platformTest type="linux" />
-                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
-            </ruleList>
-        </createSymLink>
         <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.charsets/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
             <ruleList>
                 <platformTest type="linux" />
                 <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
             </ruleList>
         </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.charsets/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.sql/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.sql/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.sql/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.net.http/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.net.http/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.net.http/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.sql.rowset/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.sql.rowset/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.sql.rowset/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.javadoc/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.javadoc/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.javadoc/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.naming/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.naming/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.naming/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.jconsole/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.jconsole/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.jconsole/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.logging/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.logging/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.logging/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.accessibility/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.accessibility/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.accessibility/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.internal.vm.compiler/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.internal.vm.compiler/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.internal.vm.compiler/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.random/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.random/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.random/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.crypto.cryptoki/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.crypto.cryptoki/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.crypto.cryptoki/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/java.instrument/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/java.instrument/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/java.instrument/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/LICENSE" linkName="${installdir}/java/legal/jdk.management.agent/LICENSE" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/LICENSE" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ADDITIONAL_LICENSE_INFO" linkName="${installdir}/java/legal/jdk.management.agent/ADDITIONAL_LICENSE_INFO" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ADDITIONAL_LICENSE_INFO" />
+            </ruleList>
+        </createSymLink>
+        <createSymLink target="../java.base/ASSEMBLY_EXCEPTION" linkName="${installdir}/java/legal/jdk.management.agent/ASSEMBLY_EXCEPTION" abortOnError="false" showMessageOnError="false">
+            <ruleList>
+                <platformTest type="linux" />
+                <fileTest condition="exists" path="${installdir}/java/legal/java.base/ASSEMBLY_EXCEPTION" />
+            </ruleList>
+        </createSymLink>
+    <!-- create Java launcher using preferred JRE -->
+    <createJavaLaunchers>
+      <destination>${java_launcher_destination}</destination>
+      <explanation>${msg(Installer.Java.CreateLaunchers.Explanation)}</explanation>
+      <progressText>${msg(Installer.Java.CreateLaunchers.Text)}</progressText>
+      <javaLauncherList>
+        <javaLauncher>
+          <allowCommandLineArguments>1</allowCommandLineArguments>
+          <arguments>${java_launcher_arguments}</arguments>
+          <binaryName>${java_launcher_binary_name}</binaryName>
+          <classpath>${java_launcher_classpath}</classpath>
+          <jarFile>${java_launcher_jar}</jarFile>
+          <mainClass>${java_launcher_mainClass}</mainClass>
+          <preferredJavaBinary>${java_executable}</preferredJavaBinary>
+          <runInConsole>0</runInConsole>
+          <vmParameters>${java_launcher_vm_parameters}</vmParameters>
+          <windowsResourceFileVersion>${project.version}</windowsResourceFileVersion>
+          <workingDirectory>${java_launcher_destination}</workingDirectory>
+        </javaLauncher>
+      </javaLauncherList>
+      <ruleList>
+        <isTrue value="${java_create_launcher}"/>
+      </ruleList>
+    </createJavaLaunchers>
 
-	<!-- create Java launcher using preferred JRE -->
-	<createJavaLaunchers>
-	    <destination>${java_launcher_destination}</destination>
-	    <explanation>${msg(Installer.Java.CreateLaunchers.Explanation)}</explanation>
-	    <progressText>${msg(Installer.Java.CreateLaunchers.Text)}</progressText>
-	    <javaLauncherList>
-		<javaLauncher>
-		    <allowCommandLineArguments>1</allowCommandLineArguments>
-		    <arguments>${java_launcher_arguments}</arguments>
-		    <binaryName>${java_launcher_binary_name}</binaryName>
-		    <classpath>${java_launcher_classpath}</classpath>
-		    <jarFile>${java_launcher_jar}</jarFile>
-		    <mainClass>${java_launcher_mainClass}</mainClass>
-		    <preferredJavaBinary>${java_executable}</preferredJavaBinary>
-		    <runInConsole>0</runInConsole>
-		    <vmParameters>${java_launcher_vm_parameters}</vmParameters>
-		    <windowsResourceFileVersion>${project.version}</windowsResourceFileVersion>
-		    <workingDirectory>${java_launcher_destination}</workingDirectory>
-		</javaLauncher>
-	    </javaLauncherList>
-	    <ruleList>
-                <isTrue value="${java_create_launcher}"/>
-	    </ruleList>
-	</createJavaLaunchers>
-
-	<!-- create start menu shortcut(s) on Microsoft Windows -->
-	<actionGroup>
-	    <actionList>
-		<setInstallerVariable>
-		    <name>java_launcher_startmenudirectory</name>
-		    <value>${windows_folder_programs}</value>
-		</setInstallerVariable>
-		<setInstallerVariable>
-		    <name>java_launcher_startmenudirectory</name>
-		    <value>${windows_folder_common_programs}</value>
-		    <ruleList>
-			<compareText logic="does_not_equal" text="${project.installationScope}" value="user"/>
-			<isTrue value="${installer_is_root_install}"/>
-		    </ruleList>
-		</setInstallerVariable>
-		<setInstallerVariable>
-		    <name>java_launcher_startmenudirectory</name>
-		    <value>${java_launcher_startmenudirectory}/${project.startMenuGroupName}</value>
-		</setInstallerVariable>
-		<createDirectory>
-		    <path>${java_launcher_startmenudirectory}</path>
-		</createDirectory>
-		<createShortcuts>
-		    <destination>${java_launcher_startmenudirectory}</destination>
-		    <explanation>${msg(Installer.Java.CreateLauncherShortcuts.Explanation)}</explanation>
-		    <progressText>${msg(Installer.Java.CreateLauncherShortcuts.Text)}</progressText>
-		    <shortcutList>
-			<startMenuShortcut>
-			    <comment>${java_launcher_binary_name}</comment>
-			    <name>${java_launcher_startmenu_shortcut_name}</name>
-			    <runAsAdmin>0</runAsAdmin>
-			    <runInTerminal>0</runInTerminal>
-			    <windowsExec>${java_launcher_destination}/${java_launcher_binary_name}</windowsExec>
-			    <windowsExecArgs></windowsExecArgs>
-			    <windowsIcon></windowsIcon>
-			    <windowsPath>${java_launcher_destination}</windowsPath>
-			</startMenuShortcut>
-		    </shortcutList>
-		</createShortcuts>
-	    </actionList>
-	    <ruleList>
-		<platformTest type="windows"/>
-		<isTrue value="${java_launcher_add_to_win_startmenu}"/>
-                <isTrue value="${java_create_launcher}"/>
-	    </ruleList>
-	</actionGroup>
-    </postInstallationActionList>
+    <!-- create start menu shortcut(s) on Microsoft Windows -->
+    <actionGroup>
+      <actionList>
+        <setInstallerVariable>
+          <name>java_launcher_startmenudirectory</name>
+          <value>${windows_folder_programs}</value>
+        </setInstallerVariable>
+        <setInstallerVariable>
+          <name>java_launcher_startmenudirectory</name>
+          <value>${windows_folder_common_programs}</value>
+          <ruleList>
+            <compareText logic="does_not_equal" text="${project.installationScope}" value="user"/>
+            <isTrue value="${installer_is_root_install}"/>
+          </ruleList>
+        </setInstallerVariable>
+        <setInstallerVariable>
+          <name>java_launcher_startmenudirectory</name>
+          <value>${java_launcher_startmenudirectory}/${project.startMenuGroupName}</value>
+        </setInstallerVariable>
+        <createDirectory>
+          <path>${java_launcher_startmenudirectory}</path>
+        </createDirectory>
+        <createShortcuts>
+          <destination>${java_launcher_startmenudirectory}</destination>
+          <explanation>${msg(Installer.Java.CreateLauncherShortcuts.Explanation)}</explanation>
+          <progressText>${msg(Installer.Java.CreateLauncherShortcuts.Text)}</progressText>
+          <shortcutList>
+            <startMenuShortcut>
+              <comment>${java_launcher_binary_name}</comment>
+              <name>${java_launcher_startmenu_shortcut_name}</name>
+              <runAsAdmin>0</runAsAdmin>
+              <runInTerminal>0</runInTerminal>
+              <windowsExec>${java_launcher_destination}/${java_launcher_binary_name}</windowsExec>
+              <windowsExecArgs></windowsExecArgs>
+              <windowsIcon></windowsIcon>
+              <windowsPath>${java_launcher_destination}</windowsPath>
+            </startMenuShortcut>
+          </shortcutList>
+        </createShortcuts>
+      </actionList>
+      <ruleList>
+        <platformTest type="windows"/>
+        <isTrue value="${java_launcher_add_to_win_startmenu}"/>
+        <isTrue value="${java_create_launcher}"/>
+      </ruleList>
+    </actionGroup>
+  </postInstallationActionList>
 </component>
