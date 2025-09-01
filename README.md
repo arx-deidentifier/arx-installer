@@ -21,19 +21,23 @@ in the root of the repository. Current Java version: 17.0.3.
 
 replace
 
-```<array>
--			<string>ar</string>
--			<string>cs</string>
--			...
--			<string>zh_TW</string>
--			<string>zh</string>
--		</array>```
+```
+<array>
+   <string>ar</string>
+   <string>cs</string>
+     ...
+   <string>zh_TW</string>
+   <string>zh</string>
+</array>
+```
 
 with
 
-```<array>
--		<string>en</string>
-</array>```
+```
+<array>
+   <string>en</string>
+</array>
+```
 
 8. Create hashes and signatures. Hashes can be created with HashMyFiles and signed with Gpg4win.
 
