@@ -6,10 +6,10 @@ This project contains configuration files for building the ARX installer. The in
 Instructions
 ----
 
-1. Download JRE/JDKs from [here](https://installbuilder.com/java/) and place the folders java-[platform] in the java folder
+1. Download JRE/JDKs from [here](https://installbuilder.com/java/) and place the folders ```java-[platform]``` in the ```java``` folder
 in the root of the repository. Current Java version: 17.0.3.
 
-2. Copy java.xml from one of the downloads into the folder java.
+2. Copy ```java.xml``` from one of the downloads into the folder java.
 
 3. In java.xml replace _all_ origin values according to the following scheme, e.g. ```<origin>java-osx/*</origin>``` with with ```<origin>${build_project_directory}/java/java-osx/*</origin>```
 
@@ -21,19 +21,19 @@ in the root of the repository. Current Java version: 17.0.3.
 
 replace
 
-<array>
+```<array>
 -			<string>ar</string>
 -			<string>cs</string>
 -			...
 -			<string>zh_TW</string>
 -			<string>zh</string>
--		</array>
+-		</array>```
 
 with
 
-<array>
+```<array>
 -		<string>en</string>
-</array>
+</array>```
 
 8. Create hashes and signatures. Hashes can be created with HashMyFiles and signed with Gpg4win.
 
