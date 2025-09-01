@@ -11,13 +11,21 @@ in the root of the repository. Current Java version: 17.0.3.
 
 2. Copy ```java.xml``` from one of the downloads into the folder java.
 
-3. In java.xml replace _all_ origin values according to the following scheme, e.g. ```<origin>java-osx/*</origin>``` with with ```<origin>${build_project_directory}/java/java-osx/*</origin>```
+3. In java.xml replace _all_ origin values according to the following scheme, e.g.:
 
-4. Update the version number in arx.xml
+replace
 
-5. Now build the installers using InstallBuilder.
+```<origin>java-osx/*</origin>```
 
-6. For OSX, the following [bugfix](https://git.eclipse.org/r/#/c/105553/1/features/org.eclipse.equinox.executable.feature/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist) currently needs to be applied manually after the app has been bundled, i.e.
+with
+
+```<origin>${build_project_directory}/java/java-osx/*</origin>```
+
+6. Update the version number in arx.xml
+
+7. Now build the installers using InstallBuilder.
+
+8. For OSX, the following [bugfix](https://git.eclipse.org/r/#/c/105553/1/features/org.eclipse.equinox.executable.feature/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist) currently needs to be applied manually after the app has been bundled, i.e.:
 
 replace
 
