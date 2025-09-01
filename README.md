@@ -11,13 +11,7 @@ in the root of the repository. Current Java version: 17.0.3.
 
 2. Copy java.xml from one of the downloads into the folder java.
 
-3. In java.xml replace _all_ origin values according to the following scheme, e.g.:
-
-```<origin>java-osx/*</origin>```
- 
-with
- 
-```<origin>${build_project_directory}/java/java-osx/*</origin>```
+3. In java.xml replace _all_ origin values according to the following scheme, e.g. ```<origin>java-osx/*</origin>``` with with ```<origin>${build_project_directory}/java/java-osx/*</origin>```
 
 4. Update the version number in arx.xml
 
