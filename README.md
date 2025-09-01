@@ -23,9 +23,25 @@ with
 
 5. Now build the installers using InstallBuilder.
 
-6. For OSX, the following [bugfix](https://git.eclipse.org/r/#/c/105553/1/features/org.eclipse.equinox.executable.feature/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist) currently needs to be applied manually after the app has been bundled.
+6. For OSX, the following [bugfix](https://git.eclipse.org/r/#/c/105553/1/features/org.eclipse.equinox.executable.feature/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist) currently needs to be applied manually after the app has been bundled, i.e.
 
-7. Create hashes and signatures. Hashes can be created with HashMyFiles and signed with Gpg4win.
+replace
+
+<array>
+-			<string>ar</string>
+-			<string>cs</string>
+-			...
+-			<string>zh_TW</string>
+-			<string>zh</string>
+-		</array>
+
+with
+
+<array>
+-		<string>en</string>
+</array>
+
+8. Create hashes and signatures. Hashes can be created with HashMyFiles and signed with Gpg4win.
 
 More details about BitRock InstallBuilder can be found at: http://installbuilder.bitrock.com/   
 
