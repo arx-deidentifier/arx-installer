@@ -1,7 +1,7 @@
 <project>
     <shortName>ARX</shortName>
     <fullName>ARX</fullName>
-    <version>3.9.1</version>
+    <version>3.9.2</version>
     <createOsxBundleZip>1</createOsxBundleZip>
     <outputDirectory>${build_project_directory}/installers/</outputDirectory>
     <licenseFile>${build_project_directory}/arx-license.txt</licenseFile>
