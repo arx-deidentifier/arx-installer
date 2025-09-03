@@ -212,12 +212,12 @@ block of XML characters -->
                 <writeFile>
                     <encoding>utf-8</encoding>
                     <path>~/.local/share/applications/arx-${project.version}.desktop</path>
-                    <text>[Desktop Entry]
+<text>[Desktop Entry]
 Version=${project.version}
 Encoding=UTF-8
 Name=ARX-${project.version}
 Comment=ARX Anonymization Tool
-Exec=${installdir}/${project.shortName}-launcher.run
+Exec=env GTK_THEME=Adwaita:light ${installdir}/${project.shortName}-launcher.run
 Icon=${installdir}/logo_256.png
 Terminal=false
 Type=Application
