@@ -29,7 +29,7 @@ with
 
 8. For OSX, the following [bugfix](https://git.eclipse.org/r/#/c/105553/1/features/org.eclipse.equinox.executable.feature/bin/cocoa/macosx/x86_64/Eclipse.app/Contents/Info.plist) currently needs to be applied manually after the app has been bundled, i.e.:
 
-replace
+In ```Info.plist``` replace
 
 ```
 <array>
