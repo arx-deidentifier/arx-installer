@@ -5,7 +5,7 @@ The installer is based on BitRock InstallBuilder.
 
 ## Instructions
 
-1. Place runnable JAR files for all platforms in the root of this repository. Adjust `arx.xml` to refer to the correct version.
+1. Place runnable JAR files for all platforms in the root of this repository.
 
 2. Download JRE/JDKs from [here](https://installbuilder.com/java/) and place the folders `java-[platform]` in the `java` folder in the root of the repository. Current Java version: **21.0.3**.
 
