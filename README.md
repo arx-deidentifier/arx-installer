@@ -6,6 +6,8 @@ This project contains configuration files for building the ARX installer. The in
 Instructions
 ----
 
+0. Place runnable jar files for all platforms in the root of this repository. Adjust ```arx.xml``` to refer to the correct version.
+
 1. Download JRE/JDKs from [here](https://installbuilder.com/java/) and place the folders ```java-[platform]``` in the ```java``` folder
 in the root of the repository. Current Java version: 17.0.3.
 
